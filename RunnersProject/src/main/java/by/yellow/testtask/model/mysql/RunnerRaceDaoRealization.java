@@ -34,8 +34,8 @@ public class RunnerRaceDaoRealization extends BaseDaoRealization
                     2, Time.valueOf(entity.getRaceTime()));
             statement.setDate(
                     3, Date.valueOf(entity.getRaceDate()));
-            statement.setTime(
-                    4, Time.valueOf(entity.getRaceDurationTime()));
+            statement.setLong(
+                    4, entity.getRaceDurationTimeInNano());
             statement.setDouble(
                     5, entity.getSpeed());
             statement.setInt(

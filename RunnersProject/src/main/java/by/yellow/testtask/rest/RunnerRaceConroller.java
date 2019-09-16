@@ -44,9 +44,6 @@ public class RunnerRaceConroller {
             @RequestBody RunnerRace runnerRace) {
 
         HttpHeaders headers = new HttpHeaders();
-        double speed = runnerRace.getDistance() / runnerRace
-                .getRaceDurationTime().toSecondOfDay();
-        runnerRace.setSpeed(speed);
         this.racingRepository.save(runnerRace);
         return new ResponseEntity<>(runnerRace, headers, HttpStatus.OK);
     }
@@ -84,10 +81,6 @@ public class RunnerRaceConroller {
             @RequestBody RunnerRace runnerRace) {
 
         HttpHeaders headers = new HttpHeaders();
-
-        double speed = runnerRace.getDistance() / runnerRace
-                .getRaceDurationTime().toSecondOfDay();
-        runnerRace.setSpeed(speed);
 
         try {
             RunnerRaceService runnerService

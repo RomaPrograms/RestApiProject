@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +33,7 @@ public class RunnerResultDaoRealization extends BaseDaoRealization
             = "select week(race_date, 1) as nedelya,"
             + " date_sub(race_date, interval (weekday(race_date)) day),"
             + " date_add(race_date, interval (6 - weekday(race_date)) day),"
-            + " sum(distance), avg(speed), cast(from_unixtime(avg("
-            + "unix_timestamp(cast(race_duration as time)))) as time) from runners_races"
+            + " sum(distance), avg(speed), avg(race_duration) from runners_races"
             + " where (extract(year from race_date)) = (?) and runner_id = (?)"
             + " group by week(race_date, 1) order by nedelya asc";
 
@@ -62,9 +62,7 @@ public class RunnerResultDaoRealization extends BaseDaoRealization
                         resultSet.getDate(3).toLocalDate());
                 runnerResult.setDistance(resultSet.getDouble(4));
                 runnerResult.setSpeed(resultSet.getDouble(5));
-                runnerResult.setRaceDuration(
-                        resultSet.getTime(6).toLocalTime());
-
+                runnerResult.setRaceDuration(resultSet.getLong(6));
                 runnerResults.add(runnerResult);
             }
 
