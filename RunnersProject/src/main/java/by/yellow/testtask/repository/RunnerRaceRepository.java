@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface RunnerRacingRepository
+public interface RunnerRaceRepository
         extends JpaRepository<RunnerRace, Integer> {
 
     @Query(value = "SELECT * FROM runners_races WHERE runner_id = ?1",

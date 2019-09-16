@@ -4,7 +4,7 @@ import by.yellow.testtask.exception.PersistentException;
 import by.yellow.testtask.model.entity.RunnerRace;
 import by.yellow.testtask.model.entity.RunnerResult;
 import by.yellow.testtask.model.mysql.TransactionFactoryRealization;
-import by.yellow.testtask.repository.RunnerRacingRepository;
+import by.yellow.testtask.repository.RunnerRaceRepository;
 import by.yellow.testtask.service.RunnerRaceService;
 import by.yellow.testtask.service.RunnerResultService;
 import by.yellow.testtask.service.ServiceFactoryRealization;
@@ -22,10 +22,10 @@ import java.util.Optional;
 @RequestMapping("api/v1/runners")
 @RestController
 @Api(value = "Runner Racing Resource", description = "Tests runner racing data")
-public class RunnerRacingConroller {
+public class RunnerRaceConroller {
 
     @Autowired
-    RunnerRacingRepository racingRepository;
+    RunnerRaceRepository racingRepository;
 
     private static ServiceFactoryRealization serviceRealization;
 
