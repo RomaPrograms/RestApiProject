@@ -40,7 +40,7 @@ public class RunnerRaceConroller {
 
     @ApiOperation(value = "Add data about racing for runner")
     @PostMapping("/addRace")
-    public ResponseEntity<RunnerRace> addRacing(
+    public ResponseEntity<RunnerRace> addRace(
             @RequestBody RunnerRace runnerRace) {
 
         HttpHeaders headers = new HttpHeaders();
@@ -113,5 +113,20 @@ public class RunnerRaceConroller {
         return runnerResults.isPresent()
                 ? new ResponseEntity<>(runnerResults.get(), headers, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "Delete runner result")
+    @DeleteMapping("/deleteResult")
+    public ResponseEntity<String> deleteResult(@RequestParam("id") int id) {
+        HttpHeaders headers = new HttpHeaders();
+
+        try {
+            racingRepository.deleteById(id);
+        } catch(Exception e) {
+            return new ResponseEntity<>("Incorrect id",
+                    headers, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
