@@ -1,9 +1,10 @@
-package by.yellow.testtask.model;
+package by.yellow.testtask.model.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
-public class RunnerResult {
+public class RunnerResult extends BaseEntity {
     private int week;
     private LocalDate startWeek;
     private LocalDate endWeek;
@@ -60,5 +61,25 @@ public class RunnerResult {
 
     public void setRaceDuration(LocalTime raceDuration) {
         this.raceDuration = raceDuration;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RunnerResult)) return false;
+        if (!super.equals(o)) return false;
+        RunnerResult that = (RunnerResult) o;
+        return getWeek() == that.getWeek() &&
+                Double.compare(that.getDistance(), getDistance()) == 0 &&
+                Double.compare(that.getSpeed(), getSpeed()) == 0 &&
+                Objects.equals(getStartWeek(), that.getStartWeek()) &&
+                Objects.equals(getEndWeek(), that.getEndWeek()) &&
+                Objects.equals(getRaceDuration(), that.getRaceDuration());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getWeek(), getStartWeek(),
+                getEndWeek(), getDistance(), getSpeed(), getRaceDuration());
     }
 }

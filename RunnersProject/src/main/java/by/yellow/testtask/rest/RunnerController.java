@@ -1,6 +1,6 @@
 package by.yellow.testtask.rest;
 
-import by.yellow.testtask.model.Runner;
+import by.yellow.testtask.model.entity.Runner;
 import by.yellow.testtask.repository.RunnerRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,36 +15,40 @@ import java.util.Optional;
 
 @RequestMapping("api/v1/runners")
 @RestController
-@Api(value = "Runner Resource", description = "Tests runner login and sign up.")
+@Api(value = "Runner Resource",
+        description = "Tests runner login and sign up.")
 public class RunnerController {
 
     @Autowired
-    RunnerRepository runnerRepository;
+    private RunnerRepository runnerRepository;
 
     @ApiOperation(value = "Lets runner to login on the site.")
     @PostMapping("/login")
-    public ResponseEntity<Runner> findByPasswordAndLogin(@RequestBody Runner runner) {
+    public ResponseEntity<Runner> findByPasswordAndLogin(
+            @RequestBody Runner runner) {
         HttpHeaders headers = new HttpHeaders();
-
-        String hashedPassword
-                = BCrypt.hashpw(runner.getPassword(), BCrypt.gensalt());
 
         Optional<Runner> optionalRunner
                 = this.runnerRepository.findByLoginAndPassword(
-                runner.getLogin(), hashedPassword);
+                runner.getLogin());
 
-        return optionalRunner.isPresent()
-                ? new ResponseEntity<>(optionalRunner.get(), headers, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (optionalRunner.isPresent() && BCrypt.checkpw(runner.getPassword(),
+                optionalRunner.get().getPassword())) {
+            return new ResponseEntity<>(optionalRunner.get(),
+                    headers, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation(value = "Lets runner to sign up on the site.")
     @PostMapping("/sign_up")
-    public ResponseEntity<Runner> createAccount(@RequestBody Runner runner) {
+    public ResponseEntity<Runner> createAccount(
+            @RequestBody Runner runner) {
         HttpHeaders headers = new HttpHeaders();
 
         if (runner == null) {
-           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         String hashedPassword

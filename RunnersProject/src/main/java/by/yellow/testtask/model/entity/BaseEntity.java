@@ -1,4 +1,4 @@
-package by.yellow.testtask.model;
+package by.yellow.testtask.model.entity;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
