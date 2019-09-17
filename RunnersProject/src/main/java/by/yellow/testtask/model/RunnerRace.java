@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -15,10 +16,8 @@ import java.time.LocalTime;
 public class RunnerRace extends BaseEntity {
     @Column(name = "distance")
     private double distance;
-    @Column(name = "race_time")
-    private LocalTime raceTime;
-    @Column(name = "race_date")
-    private LocalDate raceDate;
+    @Column(name = "race_date_and_time")
+    private LocalDateTime raceDate;
     @Column(name = "speed")
     private double speed;
     @Column(name = "race_duration")
@@ -35,11 +34,10 @@ public class RunnerRace extends BaseEntity {
                       @JsonProperty("raceDurationTime") String raceDurationTime,
                       @JsonProperty("runnerId") int runnerId) {
         this.distance = distance;
-        this.raceDate = raceDate;
+        this.raceDate = LocalDateTime.of(raceDate, raceTime);
         this.raceDurationTimeInNano
                 = LocalTime.parse(raceDurationTime).toNanoOfDay();
         this.speed = distance/this.raceDurationTimeInNano * 1000000000;
         this.runnerId = runnerId;
-        this.raceTime = raceTime;
     }
 }

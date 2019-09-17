@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +38,8 @@ public class RunnerRaceControllerTests {
         runnerRace = new RunnerRace();
         runnerRace.setId(1);
         runnerRace.setDistance(1000);
-        runnerRace.setRaceDate(LocalDate.parse("2019-08-08"));
-        runnerRace.setRaceTime(LocalTime.parse("20:20:20"));
+        runnerRace.setRaceDate(LocalDateTime.of(
+                LocalDate.parse("2019-08-08"), LocalTime.parse("20:20:20")));
         runnerRace.setRaceDurationTimeInNano(102354568);
         runnerRace.setSpeed(25);
         runnerRace.setRunnerId(1);
