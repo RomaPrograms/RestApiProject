@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RequestMapping("api/v1/runners")
 @RestController
-@Api(value = "Runner Racing Resource", description = "Tests runner racing data")
+@Api(value = "Runner Racing Resource")
 public class RunnerRaceController {
 
     @Autowired

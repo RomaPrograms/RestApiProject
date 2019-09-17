@@ -37,13 +37,13 @@ public class RunnerRaceRepositoryCustomImpl
     @Override
     public Optional<List<RunnerResult>> getReport(int year, int runnerId) {
         List<RunnerResult> runnerResults = new ArrayList<>();
-        List<Object[]> results = null;
+        List<Object[]> results;
 
         Query query = entityManager.createNativeQuery(SQL_SCRIPT_GET_REPORT);
         query.setParameter(1, year);
         query.setParameter(2, runnerId);
         results = query.getResultList();
-        RunnerResult runnerResult = null;
+        RunnerResult runnerResult;
         for(Object[] object : results) {
             runnerResult = new RunnerResult();
             runnerResult.setWeek((int) object[0]);

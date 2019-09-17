@@ -12,11 +12,15 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
+
+    private static final String PATH_TO_TESTTASK_FOLDER = "by.yellow.testtask";
+
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("by.yellow.testtask"))
+                .apis(RequestHandlerSelectors
+                        .basePackage(PATH_TO_TESTTASK_FOLDER))
                 .paths(regex("/api/v1/runner.*"))
                 .build();
     }

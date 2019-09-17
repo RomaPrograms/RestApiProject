@@ -27,7 +27,7 @@ public class RunnerControllerTests {
     private static Runner runner;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         runner = new Runner("newLogin", "newPassword");
         String hashedPassword
                 = BCrypt.hashpw(runner.getPassword(), BCrypt.gensalt());
@@ -35,7 +35,7 @@ public class RunnerControllerTests {
     }
 
     @Test
-    public void testLogin() throws Exception {
+    public void testLogin() {
         when(runnerRepository.findByLoginAndPassword("newLogin"))
                 .thenReturn(Optional.of(runner));
         Optional<Runner> actualRunner
@@ -47,7 +47,7 @@ public class RunnerControllerTests {
     }
 
     @Test
-    public void testSignUp() throws Exception {
+    public void testSignUp() {
         runnerController.createAccount(runner);
         verify(runnerRepository, times(1))
                 .save(runner);

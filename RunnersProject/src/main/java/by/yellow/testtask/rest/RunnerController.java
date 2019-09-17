@@ -15,8 +15,7 @@ import java.util.Optional;
 
 @RequestMapping("api/v1/runners")
 @RestController
-@Api(value = "Runner Resource",
-        description = "Tests runner login and sign up.")
+@Api(value = "Runner Resource")
 public class RunnerController {
 
     @Autowired
