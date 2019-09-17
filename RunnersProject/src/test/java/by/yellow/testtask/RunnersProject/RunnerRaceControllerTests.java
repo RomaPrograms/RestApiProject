@@ -4,7 +4,7 @@ import by.yellow.testtask.exception.PersistentException;
 import by.yellow.testtask.model.entity.RunnerRace;
 import by.yellow.testtask.model.mysql.TransactionFactoryRealization;
 import by.yellow.testtask.repository.RunnerRaceRepository;
-import by.yellow.testtask.rest.RunnerRaceConroller;
+import by.yellow.testtask.rest.RunnerRaceController;
 import by.yellow.testtask.service.RunnerRaceService;
 import by.yellow.testtask.service.RunnerResultService;
 import by.yellow.testtask.service.ServiceFactoryRealization;
@@ -32,7 +32,7 @@ public class RunnerRaceControllerTests {
     private RunnerRaceRepository runnerRaceRepository;
 
     @InjectMocks
-    private RunnerRaceConroller runnerRaceController;
+    private RunnerRaceController runnerRaceController;
 
     private static RunnerRace runnerRace;
 
