@@ -1,13 +1,9 @@
 package by.yellow.testtask.RunnersProject;
 
-import by.yellow.testtask.exception.PersistentException;
 import by.yellow.testtask.model.RunnerRace;
-import by.yellow.testtask.model.mysql.TransactionFactoryRealization;
+import by.yellow.testtask.model.RunnerResult;
 import by.yellow.testtask.repository.RunnerRaceRepository;
 import by.yellow.testtask.rest.RunnerRaceController;
-import by.yellow.testtask.service.RunnerRaceService;
-import by.yellow.testtask.service.RunnerResultService;
-import by.yellow.testtask.service.ServiceFactoryRealization;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -36,26 +33,8 @@ public class RunnerRaceControllerTests {
 
     private static RunnerRace runnerRace;
 
-    private static ServiceFactoryRealization serviceRealization;
-
-    @Mock
-    private static RunnerRaceService runnerService;
-
-    @Mock
-    private static RunnerResultService runnerResultService;
-
     @BeforeClass
     public static void setUp() {
-        try {
-            serviceRealization = new ServiceFactoryRealization(
-                    new TransactionFactoryRealization());
-            runnerService
-                    = serviceRealization.getService(RunnerRaceService.class);
-            runnerResultService
-                    = serviceRealization.getService(RunnerResultService.class);
-        } catch (PersistentException e) {
-            e.printStackTrace();
-        }
         runnerRace = new RunnerRace();
         runnerRace.setId(1);
         runnerRace.setDistance(1000);
@@ -84,6 +63,18 @@ public class RunnerRaceControllerTests {
     }
 
     @Test
+    public void testUpdateRaceById() {
+        when(runnerRaceRepository.updateRunnerRace(runnerRace))
+                .thenReturn(true);
+        boolean actualResult
+                = runnerRaceRepository.updateRunnerRace(runnerRace);
+        runnerRaceController.updateRaceById(runnerRace);
+        verify(runnerRaceRepository, times(2))
+                .updateRunnerRace(runnerRace);
+        Assert.assertTrue(actualResult);
+    }
+
+    @Test
     public void testGetAllRaceById() {
         List<RunnerRace> runnerRaces = new ArrayList<>();
         when(runnerRaceRepository.getAllRaceByRunnerId(1))
@@ -100,5 +91,19 @@ public class RunnerRaceControllerTests {
     public void testDeleteRace() {
         runnerRaceController.deleteResult(1);
         verify(runnerRaceRepository).deleteById(1);
+    }
+
+    @Test
+    public void testGetReport() {
+        Optional<List<RunnerResult>> runnerResults
+                = Optional.of(new ArrayList<>());
+        when(runnerRaceRepository.getReport(2019, 1))
+                .thenReturn(Optional.of(new ArrayList<>()));
+        Optional<List<RunnerResult>> actualRunnerResults
+                = runnerRaceRepository.getReport(2019, 1);
+        runnerRaceController.getReport(2019, 1);
+        verify(runnerRaceRepository, times(2))
+                .getReport(2019, 1);
+        Assert.assertEquals(actualRunnerResults, runnerResults);
     }
 }
