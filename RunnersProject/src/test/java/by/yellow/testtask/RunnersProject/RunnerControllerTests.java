@@ -1,6 +1,6 @@
 package by.yellow.testtask.RunnersProject;
 
-import by.yellow.testtask.model.entity.Runner;
+import by.yellow.testtask.model.Runner;
 import by.yellow.testtask.repository.RunnerRepository;
 import by.yellow.testtask.rest.RunnerController;
 import jbcrypt.BCrypt;

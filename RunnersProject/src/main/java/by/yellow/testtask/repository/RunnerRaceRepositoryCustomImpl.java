@@ -1,7 +1,7 @@
 package by.yellow.testtask.repository;
 
-import by.yellow.testtask.model.entity.RunnerRace;
-import by.yellow.testtask.model.entity.RunnerResult;
+import by.yellow.testtask.model.RunnerRace;
+import by.yellow.testtask.model.RunnerResult;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

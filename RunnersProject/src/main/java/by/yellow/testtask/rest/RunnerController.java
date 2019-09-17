@@ -1,6 +1,6 @@
 package by.yellow.testtask.rest;
 
-import by.yellow.testtask.model.entity.Runner;
+import by.yellow.testtask.model.Runner;
 import by.yellow.testtask.repository.RunnerRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

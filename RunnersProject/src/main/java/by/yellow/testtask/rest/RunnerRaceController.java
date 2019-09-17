@@ -1,7 +1,7 @@
 package by.yellow.testtask.rest;
 
-import by.yellow.testtask.model.entity.RunnerRace;
-import by.yellow.testtask.model.entity.RunnerResult;
+import by.yellow.testtask.model.RunnerRace;
+import by.yellow.testtask.model.RunnerResult;
 import by.yellow.testtask.repository.RunnerRaceRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

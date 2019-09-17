@@ -1,7 +1,7 @@
 package by.yellow.testtask.repository;
 
-import by.yellow.testtask.model.entity.RunnerRace;
-import by.yellow.testtask.model.entity.RunnerResult;
+import by.yellow.testtask.model.RunnerRace;
+import by.yellow.testtask.model.RunnerResult;
 
 import java.util.List;
 import java.util.Optional;

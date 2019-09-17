@@ -1,6 +1,6 @@
 package by.yellow.testtask.repository;
 
-import by.yellow.testtask.model.entity.Runner;
+import by.yellow.testtask.model.Runner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

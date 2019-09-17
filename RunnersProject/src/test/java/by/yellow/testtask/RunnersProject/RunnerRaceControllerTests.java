@@ -1,7 +1,7 @@
 package by.yellow.testtask.RunnersProject;
 
 import by.yellow.testtask.exception.PersistentException;
-import by.yellow.testtask.model.entity.RunnerRace;
+import by.yellow.testtask.model.RunnerRace;
 import by.yellow.testtask.model.mysql.TransactionFactoryRealization;
 import by.yellow.testtask.repository.RunnerRaceRepository;
 import by.yellow.testtask.rest.RunnerRaceController;
