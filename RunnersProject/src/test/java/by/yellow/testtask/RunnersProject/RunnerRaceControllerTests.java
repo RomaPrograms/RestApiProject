@@ -6,6 +6,7 @@ import by.yellow.testtask.model.mysql.TransactionFactoryRealization;
 import by.yellow.testtask.repository.RunnerRaceRepository;
 import by.yellow.testtask.rest.RunnerRaceConroller;
 import by.yellow.testtask.service.RunnerRaceService;
+import by.yellow.testtask.service.RunnerResultService;
 import by.yellow.testtask.service.ServiceFactoryRealization;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -14,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,7 +38,11 @@ public class RunnerRaceControllerTests {
 
     private static ServiceFactoryRealization serviceRealization;
 
+    @Mock
     private static RunnerRaceService runnerService;
+
+    @Mock
+    private static RunnerResultService runnerResultService;
 
     @BeforeClass
     public static void setUp() {
@@ -48,6 +51,8 @@ public class RunnerRaceControllerTests {
                     new TransactionFactoryRealization());
             runnerService
                     = serviceRealization.getService(RunnerRaceService.class);
+            runnerResultService
+                    = serviceRealization.getService(RunnerResultService.class);
         } catch (PersistentException e) {
             e.printStackTrace();
         }
@@ -77,18 +82,6 @@ public class RunnerRaceControllerTests {
         verify(runnerRaceRepository, times(2)).findById(1);
         Assert.assertEquals(actualRunnerRace, Optional.of(runnerRace));
     }
-
-//    @Test
-//    public void testUpdateRaceById() {
-//        when(runnerService.updateRunnerRace(runnerRace))
-//                .thenReturn(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-//        ResponseEntity<RunnerRace> actualRunnerRace
-//                = runnerRaceController.updateRaceById(runnerRace);
-//        verify(runnerRaceController,
-//                times(2)).updateRaceById(runnerRace);
-//        Assert.assertEquals(actualRunnerRace,
-//                new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-//    }
 
     @Test
     public void testGetAllRaceById() {
