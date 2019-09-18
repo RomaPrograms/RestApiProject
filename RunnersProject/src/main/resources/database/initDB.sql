@@ -11,13 +11,11 @@ CREATE TABLE `runners` (
 CREATE TABLE `runners_races` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `distance` double NOT NULL,
-    `race_time` time NOT NULL,
-    `race_date` date NOT NULL,
+    `race_date_and_time` datetime NOT NULL,
     `speed` double NOT NULL,
-    `race_duration` time(3) NOT NULL,
+    `race_duration` bigint(20) NOT NULL,
     `runner_id` int(11) NOT NULL,
     PRIMARY KEY (`id`),
-    KEY `INDEX_race_date` (`race_date`) /*!80000 INVISIBLE */,
     KEY `FK_runners_races_idx` (`runner_id`),
     CONSTRAINT `FK_runner_id` FOREIGN KEY (`runner_id`) REFERENCES `runners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
